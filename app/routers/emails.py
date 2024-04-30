@@ -27,7 +27,7 @@ router = APIRouter(
 
 @router.get("/", response_model=List[Email])
 def read_emails(
-    source: str,
+    source: Optional[str] = "Comparison",
     db: Session = Depends(get_db)
     ):
     return crud_get_emails(db=db, source=source)
