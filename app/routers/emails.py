@@ -43,7 +43,7 @@ def send_email(recipient, subject, body):
     message = f'From: {settings.gmail_user}\n' + \
         f'To: {", ".join(recipient)}\n' + \
             f'Subject: {subject}\n\n' + \
-                f'{body}\n\n\n\nRegards\nReally Team'
+                f'{body}\n\n\n\nRegards\nEczemapp Team'
     # logger.info(f"message: {message}")
     try:
         server = SMTP_SSL(settings.gmail_smtp_url, settings.gmail_smtp_port)

@@ -7,7 +7,7 @@ from datetime import datetime
 class EmailEntry(BaseModel):
     source: Optional[str] = "Example: Comparison"
     purpose: Optional[str] = "Example: Validation Error Email"
-    recipient: Optional[str] = "Example (multiple emails separated by commas): dgadkari@really.com"
+    recipient: Optional[str] = "Example (multiple emails separated by commas): dgadkari@gmail.com"
     subject: Optional[str] = "Example: Plan Name Validation"
     body: Optional[str] = "Example: Body of the email...."
 
