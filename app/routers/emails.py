@@ -27,9 +27,10 @@ router = APIRouter(
 
 @router.get("/", response_model=List[Email])
 def read_emails(
+    source: str,
     db: Session = Depends(get_db)
     ):
-    return crud_get_emails(db=db)
+    return crud_get_emails(db=db, source=source)
 
 
 def send_email(recipient, subject, body):

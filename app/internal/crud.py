@@ -5,7 +5,7 @@ from . import models, schemas
 from ..internal.common import logger
 
 
-def crud_get_emails(db: Session, skip: int = 0, limit: int = 100, source: int = "Comparison"):
+def crud_get_emails(db: Session, skip: int = 0, limit: int = 100, source: str = "Comparison"):
     return db.query(models.Emails).\
         filter(models.Emails.source == source).\
             offset(skip).\
