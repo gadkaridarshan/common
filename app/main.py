@@ -22,7 +22,7 @@ tags_metadata = [
 from fastapi.middleware.cors import CORSMiddleware
 
 from .dependencies import get_header_token
-from .routers import classifications, emails
+from .routers import classifications, emails, feedbacks
 from .internal.common import logger
 
 
@@ -58,6 +58,7 @@ app.add_middleware(
 
 app.include_router(emails.router)
 app.include_router(classifications.router)
+app.include_router(feedbacks.router)
 
 
 @app.on_event("startup")

@@ -31,7 +31,7 @@ class Email(EmailBase):
 
 
 class ClassificationBase(BaseModel):
-    serial: Optional[str] = "Example: 00000000"
+    serial: Optional[str] = "Example: 00:00:00:00:00:00:00"
     className: Optional[str] = "Example: Eczema"
     classId: Optional[int] = "Example: 8"
     score: Optional[float] = "Example: 0.1"
@@ -43,6 +43,26 @@ class ClassificationCreate(ClassificationBase):
 
 
 class Classification(ClassificationBase):
+    id: Optional[int]
+    createdDatetime: Optional[datetime]
+    updatedDatetime: Optional[datetime]
+
+    class Config:
+        orm_mode = True
+
+
+class FeedbackBase(BaseModel):
+    serial: Optional[str] = "Example: 00:00:00:00:00:00:00"
+    summary: Optional[str] = "Example: Less Itchy"
+    details: Optional[int] = "Example: There is some improvement, the rash is less itchy now"
+    imgLink: Optional[float] = "Example: /storage.azure.com/sgsgsrg"
+
+
+class FeedbackCreate(FeedbackBase):
+    pass
+
+
+class Feedback(FeedbackBase):
     id: Optional[int]
     createdDatetime: Optional[datetime]
     updatedDatetime: Optional[datetime]

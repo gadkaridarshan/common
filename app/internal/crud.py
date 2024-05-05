@@ -48,3 +48,12 @@ def crud_create_classification(db: Session, classification: schemas.Classificati
     db.refresh(db_classfication)
     return db_classfication
 
+
+def crud_create_feedback(db: Session, feedback: schemas.FeedbackCreate):
+    # insert into feedback table
+    db_feedback = models.Feedback(**feedback.dict())
+    db.add(db_feedback)
+    db.commit()
+    db.refresh(db_feedback)
+    return db_feedback
+

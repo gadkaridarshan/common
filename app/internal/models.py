@@ -19,6 +19,7 @@ class Emails(Base):
     createdDatetime = Column(DateTime(timezone=True), server_default=func.now())
     updatedDatetime = Column(DateTime(timezone=True), onupdate=func.now())
 
+
 class Classifications(Base):
     __tablename__ = 'classification'
 
@@ -33,4 +34,16 @@ class Classifications(Base):
     createdDatetime = Column(DateTime(timezone=True), server_default=func.now())
     updatedDatetime = Column(DateTime(timezone=True), onupdate=func.now())
 
+
+class Feedback(Base):
+    __tablename__ = 'feedback'
+
+    __table_args__ = {'schema': 'common'}
+    id  = Column(Integer, primary_key=True, index=True)
+    serial = Column(String, nullable=True)
+    summary = Column(String, nullable=True)
+    details = Column(String, nullable=True)
+    imgLink = Column(String, nullable=True)
+    createdDatetime = Column(DateTime(timezone=True), server_default=func.now())
+    updatedDatetime = Column(DateTime(timezone=True), onupdate=func.now())
 
