@@ -35,7 +35,7 @@ class Classifications(Base):
     updatedDatetime = Column(DateTime(timezone=True), onupdate=func.now())
 
 
-class Feedback(Base):
+class Feedbacks(Base):
     __tablename__ = 'feedback'
 
     __table_args__ = {'schema': 'common'}

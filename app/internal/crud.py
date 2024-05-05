@@ -51,9 +51,17 @@ def crud_create_classification(db: Session, classification: schemas.Classificati
 
 def crud_create_feedback(db: Session, feedback: schemas.FeedbackCreate):
     # insert into feedback table
-    db_feedback = models.Feedback(**feedback.dict())
+    db_feedback = models.Feedbacks(**feedback.dict())
     db.add(db_feedback)
     db.commit()
     db.refresh(db_feedback)
     return db_feedback
+
+
+def crud_get_feedbacks(db: Session, skip: int = 0, limit: int = 100, serial: str = "00:00:00:00:00:00:00"):
+    return db.query(models.Feedbacks).\
+        filter(models.Feedbacks.serial == serial).\
+            offset(skip).\
+                limit(limit).\
+                    all()
 

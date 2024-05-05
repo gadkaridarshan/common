@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from typing import Optional
+from typing import Optional, List
 
 from ..internal.schemas import (
     Feedback,
@@ -8,6 +8,7 @@ from ..internal.schemas import (
     )
 from ..internal.crud import (
     crud_create_feedback,
+    crud_get_feedbacks,
     Session
     )
 from ..internal.common import logger
@@ -40,4 +41,11 @@ def create_feedback(
             detail="Issue with creating Feedback Record to DB"
             )
 
+
+@router.get("/", response_model=List[Feedback])
+def read_feedbacks(
+    serial: Optional[str] = "00:00:00:00:00:00:00",
+    db: Session = Depends(get_db)
+    ):
+    return crud_get_feedbacks(db=db, serial=serial)
 
