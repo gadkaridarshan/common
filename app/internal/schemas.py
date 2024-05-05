@@ -54,8 +54,8 @@ class Classification(ClassificationBase):
 class FeedbackBase(BaseModel):
     serial: Optional[str] = "Example: 00:00:00:00:00:00:00"
     summary: Optional[str] = "Example: Less Itchy"
-    details: Optional[int] = "Example: There is some improvement, the rash is less itchy now"
-    imgLink: Optional[float] = "Example: /storage.azure.com/sgsgsrg"
+    details: Optional[str] = "Example: There is some improvement, the rash is less itchy now"
+    imgLink: Optional[str] = "Example: /storage.azure.com/sgsgsrg"
 
 
 class FeedbackCreate(FeedbackBase):
