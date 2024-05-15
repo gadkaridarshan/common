@@ -47,6 +47,6 @@ def read_feedbacks(
     serial: Optional[str] = "00:00:00:00:00:00:00",
     db: Session = Depends(get_db)
     ):
-    logger.info(f"About to write the feedback records in DB for: {serial}")
+    logger.info(f"About to read the feedback records in DB for: {serial}")
     return crud_get_feedbacks(db=db, serial=serial)
 
