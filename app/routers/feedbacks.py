@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+import aiofiles
 
 from typing import Optional, List
 
@@ -23,7 +24,7 @@ router = APIRouter(
 
 
 @router.post("/create/", response_model=Optional[Feedback])
-def create_feedback(
+async def create_feedback(
     serial: Optional[str] = "Example: 00:00:00:00:00:00:00",
     summary: Optional[str] = "Example: Less Itchy",
     details: Optional[str] = "Example: There is some improvement, the rash is less itchy now",
@@ -45,6 +46,13 @@ def create_feedback(
     else:
         logger.info(f"feedback file name: {feedback_file.filename}")
         logger.info(f"feedback file size: {feedback_file.size}")
+        # save file to disk
+        async with aiofiles.open(
+            f"~/Documents/Homeopath/code/uploaddata/{feedback_file.filename}",
+            'wb'
+            ) as out_file:
+            content = await feedback_file.read()  # async read
+            await out_file.write(content)  # async write
 
     # create feedback entry in the DB
     try:
@@ -59,7 +67,7 @@ def create_feedback(
 
 
 @router.get("/", response_model=List[Feedback])
-def read_feedbacks(
+async def read_feedbacks(
     serial: Optional[str] = "00:00:00:00:00:00:00",
     db: Session = Depends(get_db)
     ):
