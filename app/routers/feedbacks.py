@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile
 
-from typing import Optional, List
+from typing import Optional, List, Union
 
 from ..internal.schemas import (
     Feedback,
@@ -25,10 +25,15 @@ router = APIRouter(
 @router.post("/create/", response_model=Optional[Feedback])
 def create_feedback(
     feedback: FeedbackCreate,
+    feedback_file: Union[UploadFile, None] = None,
     db: Session = Depends(get_db)
     ):
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
+    if not file:
+        logger.info("feedback file: No upload file sent")
+    else:
+        logger.info(f"feedback file filename: {file.filename}")
 
     # create feedback entry in the DB
     try:
