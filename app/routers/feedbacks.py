@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 
-from typing import Optional, List, Union
+from typing import Optional, List, Union, Annotated
 
 from ..internal.schemas import (
     Feedback,
@@ -45,6 +45,14 @@ def create_feedback(
             status_code=404,
             detail="Issue with creating Feedback Record to DB"
             )
+
+
+@router.post("/files/")
+async def create_file(file: Annotated[Union[bytes, None], File()] = None):
+    if not file:
+        return {"message": "No file sent"}
+    else:
+        return {"file_size": len(file)}
 
 
 @router.post("/uploadfile/")
