@@ -47,6 +47,14 @@ def create_feedback(
             )
 
 
+@router.post("/uploadfile/")
+async def create_upload_file(file: Union[UploadFile, None] = None):
+    if not file:
+        return {"message": "No upload file sent"}
+    else:
+        return {"filename": file.filename}
+
+
 @router.get("/", response_model=List[Feedback])
 def read_feedbacks(
     serial: Optional[str] = "00:00:00:00:00:00:00",
