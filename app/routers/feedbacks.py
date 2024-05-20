@@ -25,15 +25,15 @@ router = APIRouter(
 @router.post("/create/", response_model=Optional[Feedback])
 def create_feedback(
     feedback: FeedbackCreate,
-    feedback_file: Union[UploadFile, None] = None,
+    # feedback_file: Union[UploadFile, None] = None,
     db: Session = Depends(get_db)
     ):
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
-    if not feedback_file:
-        logger.info("feedback file: No upload file sent")
-    else:
-        logger.info(f"feedback file filename: {feedback_file.filename}")
+    # if not feedback_file:
+    #     logger.info("feedback file: No upload file sent")
+    # else:
+    #     logger.info(f"feedback file filename: {feedback_file.filename}")
 
     # create feedback entry in the DB
     try:
