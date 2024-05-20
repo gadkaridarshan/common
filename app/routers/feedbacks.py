@@ -29,7 +29,7 @@ def create_feedback(
     db: Session = Depends(get_db)
     ):
     # create feedback entry
-    feedback = feedback.model_dump()
+    feedback = feedback.dict()
     logger.info(f"feedback serial: {feedback.serial}")
     if not feedback_file:
         logger.info("feedback file: No upload file sent")
