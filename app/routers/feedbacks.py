@@ -25,8 +25,8 @@ router = APIRouter(
 @router.post("/create/", response_model=Optional[Feedback])
 def create_feedback(
     feedback: FeedbackCreate,
-    feedback_file: UploadFile = File(None),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    feedback_file: UploadFile = File(None)
     ):
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
