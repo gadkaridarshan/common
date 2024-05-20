@@ -48,7 +48,25 @@ def create_feedback(
 
 
 @router.post("/files/")
-async def create_file(file: UploadFile = File(...)):
+async def create_file(file: Optional[UploadFile] = File(None)):
+    logger.info(f"dir(file): {dir(file)}")
+    if not file:
+        return {"message": "No file sent"}
+    else:
+        return {"file_size": file.size}
+
+
+@router.post("/files2/")
+async def create_file(file: Optional[UploadFile] = File(...)):
+    logger.info(f"dir(file): {dir(file)}")
+    if not file:
+        return {"message": "No file sent"}
+    else:
+        return {"file_size": file.size}
+
+
+@router.post("/files3/")
+async def create_file(file: UploadFile = File(None)):
     logger.info(f"dir(file): {dir(file)}")
     if not file:
         return {"message": "No file sent"}
