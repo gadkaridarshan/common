@@ -30,10 +30,10 @@ def create_feedback(
     ):
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
-    if not file:
+    if not feedback_file:
         logger.info("feedback file: No upload file sent")
     else:
-        logger.info(f"feedback file filename: {file.filename}")
+        logger.info(f"feedback file filename: {feedback_file.filename}")
 
     # create feedback entry in the DB
     try:
