@@ -47,12 +47,19 @@ async def create_feedback(
         logger.info(f"feedback file name: {feedback_file.filename}")
         logger.info(f"feedback file size: {feedback_file.size}")
         # save file to disk
-        async with aiofiles.open(
-            f"~/Documents/Homeopath/code/uploaddata/{feedback_file.filename}",
-            'wb'
-            ) as out_file:
-            content = await feedback_file.read()  # async read
-            await out_file.write(content)  # async write
+        try:
+            async with aiofiles.open(
+                f"~/Documents/Homeopath/code/uploaddata/{feedback_file.filename}",
+                'wb'
+                ) as out_file:
+                content = await feedback_file.read()  # async read
+                await out_file.write(content)  # async write
+        except Exception as e:
+            logger.error(f'Open file to save error: {e}')
+            raise HTTPException(
+                status_code=404,
+                detail="Issue with opening the file to save"
+                )
 
     # create feedback entry in the DB
     try:
