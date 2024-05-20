@@ -24,10 +24,20 @@ router = APIRouter(
 
 @router.post("/create/", response_model=Optional[Feedback])
 def create_feedback(
-    feedback: FeedbackCreate,
+    serial: Optional[str] = "Example: 00:00:00:00:00:00:00",
+    summary: Optional[str] = "Example: Less Itchy",
+    details: Optional[str] = "Example: There is some improvement, the rash is less itchy now",
+    imgLink: Optional[str] = "Example: /storage.azure.com/sgsgsrg",
+    # feedback: FeedbackCreate,
     feedback_file: UploadFile = File(None),
     db: Session = Depends(get_db)
     ):
+    feedback = FeedbackCreate(**{
+        "serial": serial,
+        "summary": summary,
+        "details": details,
+        "imgLink": imgLink
+    })
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
     if not feedback_file:
