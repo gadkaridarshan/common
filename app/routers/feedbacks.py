@@ -50,7 +50,7 @@ async def create_feedback(
         try:
             async with aiofiles.open(
                 f"~/Documents/Homeopath/code/uploaddata/{feedback_file.filename}",
-                'wb'
+                'w+'
                 ) as out_file:
                 content = await feedback_file.read()  # async read
                 await out_file.write(content)  # async write
