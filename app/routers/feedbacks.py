@@ -48,7 +48,7 @@ def create_feedback(
 
 
 @router.post("/files/")
-async def create_file(file: Annotated[Union[bytes, None], File()] = None):
+async def create_file(file: UploadFile = File(...)):
     if not file:
         return {"message": "No file sent"}
     else:
