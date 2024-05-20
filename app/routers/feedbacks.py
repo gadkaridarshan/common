@@ -25,15 +25,16 @@ router = APIRouter(
 @router.post("/create/", response_model=Optional[Feedback])
 def create_feedback(
     feedback: FeedbackCreate,
-    # feedback_file: Union[UploadFile, None] = None,
+    feedback_file: UploadFile = File(None),
     db: Session = Depends(get_db)
     ):
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
-    # if not feedback_file:
-    #     logger.info("feedback file: No upload file sent")
-    # else:
-    #     logger.info(f"feedback file filename: {feedback_file.filename}")
+    if not feedback_file:
+        logger.info("feedback file: No upload file sent")
+    else:
+        logger.info(f"feedback file name: {feedback_file.filename}")
+        logger.info(f"feedback file size: {feedback_file.size}")
 
     # create feedback entry in the DB
     try:
@@ -45,41 +46,6 @@ def create_feedback(
             status_code=404,
             detail="Issue with creating Feedback Record to DB"
             )
-
-
-@router.post("/files/")
-async def create_file(file: Optional[UploadFile] = File(None)):
-    logger.info(f"dir(file): {dir(file)}")
-    if not file:
-        return {"message": "No file sent"}
-    else:
-        return {"file_size": file.size}
-
-
-@router.post("/files2/")
-async def create_file(file: Optional[UploadFile] = File(...)):
-    logger.info(f"dir(file): {dir(file)}")
-    if not file:
-        return {"message": "No file sent"}
-    else:
-        return {"file_size": file.size}
-
-
-@router.post("/files3/")
-async def create_file(file: UploadFile = File(None)):
-    logger.info(f"dir(file): {dir(file)}")
-    if not file:
-        return {"message": "No file sent"}
-    else:
-        return {"file_size": file.size}
-
-
-@router.post("/uploadfile/")
-async def create_upload_file(file: UploadFile = File(...)):
-    if not file:
-        return {"message": "No upload file sent"}
-    else:
-        return {"filename": file.filename}
 
 
 @router.get("/", response_model=List[Feedback])
