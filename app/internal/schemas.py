@@ -1,7 +1,8 @@
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from datetime import datetime
+from json import loads
 
 
 class EmailEntry(BaseModel):
@@ -56,6 +57,12 @@ class FeedbackBase(BaseModel):
     summary: Optional[str] = "Example: Less Itchy"
     details: Optional[str] = "Example: There is some improvement, the rash is less itchy now"
     imgLink: Optional[str] = "Example: /storage.azure.com/sgsgsrg"
+
+    @validator('configuration', pre=True)
+    def parse_configuration(cls, value):
+        if isinstance(value, str):
+            return loads(value)
+        return value
 
 
 class FeedbackCreate(FeedbackBase):

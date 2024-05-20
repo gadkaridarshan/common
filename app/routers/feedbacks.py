@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 
 from typing import Optional, List
-from ast import literal_eval
 
 from ..internal.schemas import (
     Feedback,
@@ -30,7 +29,6 @@ def create_feedback(
     db: Session = Depends(get_db)
     ):
     # create feedback entry
-    feedback = literal_eval(feedback)
     logger.info(f"feedback serial: {feedback.serial}")
     if not feedback_file:
         logger.info("feedback file: No upload file sent")
