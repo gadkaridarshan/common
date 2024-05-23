@@ -43,7 +43,7 @@ async def read_img(
             media_type="image/png"
             )
     except Exception as e:
-        logger.error(f"Image not found: {e}")
+        logger.error(f"Image not found, returning placeholder image: {e}")
         return FileResponse(
             path=f"{PATH}Placeholder.png",
             media_type="image/png"
@@ -62,7 +62,7 @@ async def read_img(
             media_type="image/png"
             )
     except Exception as e:
-        logger.error(f"Image not found: {e}")
+        logger.error(f"Image not found, returning placeholder image: {e}")
         return FileResponse(
             path=f"{PATH}Placeholder.png",
             media_type="image/png"
