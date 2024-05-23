@@ -39,6 +39,7 @@ async def read_img(
     logger.info(onlyFiles)
     logger.info(f"path: {path}")
     logger.info(f"filename: {filename}")
+    logger.info(f"filename in files: {filename in onlyFiles}")
     return FileResponse(
         path=path,
         filename=filename,
