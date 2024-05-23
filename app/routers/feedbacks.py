@@ -27,19 +27,32 @@ router = APIRouter(
 )
 
 
-@router.get("/img", response_class=FileResponse)
+@router.get("/img/serial_dt", response_class=FileResponse)
 async def read_img(
     serial: Optional[str] = "00:00:00:00:00:00:00",
-    date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
+    date_time_str: Optional[str] = "2024-05-23-18-00-34-328+0100"
     ):
     path="/Users/darshangadkari/Documents/Homeopath/uploaddata/"
     filename=f"{serial.replace(':','_')}__{date_time_str}.png"
-    onlyFiles = [f for f in listdir(path) if isfile(join(path, f))]
+    # onlyFiles = [f for f in listdir(path) if isfile(join(path, f))]
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
-    logger.info(onlyFiles)
-    logger.info(f"path: {path}")
+    # logger.info(onlyFiles)
+    # logger.info(f"path: {path}")
     logger.info(f"filename: {filename}")
-    logger.info(f"filename in files: {filename in onlyFiles}")
+    # logger.info(f"filename in files: {filename in onlyFiles}")
+    return FileResponse(
+        path=f"{path}{filename}",
+        media_type="image/png"
+        )
+
+
+@router.get("/img/name", response_class=FileResponse)
+async def read_img(
+    filename: Optional[str] = "00_00_00_00_00_00_00__2024-05-23-18-00-34-328+0100.png",
+    ):
+    path="/Users/darshangadkari/Documents/Homeopath/uploaddata/"
+    logger.info(f"About to return img with the name: {filename}")
+    logger.info(f"filename: {filename}")
     return FileResponse(
         path=f"{path}{filename}",
         media_type="image/png"
