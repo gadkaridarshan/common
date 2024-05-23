@@ -33,12 +33,15 @@ async def read_img(
     date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
     ):
     path="/Users/darshangadkari/Documents/Homeopath/uploaddata/"
+    filename=f"{serial.replace(':','_')}__{date_time_str}.png"
     onlyFiles = [f for f in listdir(path) if isfile(join(path, f))]
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
     logger.info(onlyFiles)
+    logger.info(f"path: {path}")
+    logger.info(f"filename: {filename}")
     return FileResponse(
-        path=f"{path}{serial.replace(':','_')}__{date_time_str}.png",
-        filename=f"{serial.replace(':','_')}__{date_time_str}.png",
+        path=path,
+        filename=filename,
         media_type="image/png"
         )
 
