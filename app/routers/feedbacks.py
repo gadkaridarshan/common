@@ -37,12 +37,13 @@ async def read_img(
     filename=f"{serial.replace(':','_')}__{date_time_str}.png"
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
     logger.info(f"filename: {filename}")
-    try:
+    onlyFiles = [f for f in listdir(PATH) if isfile(join(PATH, f))]
+    if filename in onlyFiles:
         return FileResponse(
             path=f"{PATH}{filename}",
             media_type="image/png"
             )
-    except Exception as e:
+    else:
         logger.error(f"Image not found, returning placeholder image: {e}")
         return FileResponse(
             path=f"{PATH}Placeholder.png",
@@ -56,12 +57,13 @@ async def read_img(
     ):
     logger.info(f"About to return img with the name: {filename}")
     logger.info(f"filename: {filename}")
-    try:
+    onlyFiles = [f for f in listdir(PATH) if isfile(join(PATH, f))]
+    if filename in onlyFiles:
         return FileResponse(
             path=f"{PATH}{filename}",
             media_type="image/png"
             )
-    except Exception as e:
+    else:
         logger.error(f"Image not found, returning placeholder image: {e}")
         return FileResponse(
             path=f"{PATH}Placeholder.png",
