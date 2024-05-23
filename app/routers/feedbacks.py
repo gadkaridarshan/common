@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
+from fastapi.responses import FileResponse
 import aiofiles
 
 from typing import Optional, List
@@ -23,11 +24,13 @@ router = APIRouter(
 )
 
 
-# @router.get("/img")
-# async def read_img(
-#     serial: Optional[str] = "00:00:00:00:00:00:00"
-#     ):
-#     logger.info(f"About to return img for the serial: {serial} and date time : {date}")
+@router.get("/img")
+async def read_img(
+    serial: Optional[str] = "00:00:00:00:00:00:00",
+    date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
+    ):
+    logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
+    return FileResponse(f"{serial.replace(':','_')}__{date_time_str}.png")
 
 
 @router.post("/create/", response_model=Optional[Feedback])
