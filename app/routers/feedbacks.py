@@ -24,7 +24,7 @@ router = APIRouter(
 )
 
 
-@router.get("/img")
+@router.get("/img", response_class=FileResponse)
 async def read_img(
     serial: Optional[str] = "00:00:00:00:00:00:00",
     date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
