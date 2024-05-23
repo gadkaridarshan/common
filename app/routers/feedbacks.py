@@ -23,12 +23,19 @@ router = APIRouter(
 )
 
 
+# @router.get("/img")
+# async def read_img(
+#     serial: Optional[str] = "00:00:00:00:00:00:00"
+#     ):
+#     logger.info(f"About to return img for the serial: {serial} and date time : {date}")
+
+
 @router.post("/create/", response_model=Optional[Feedback])
 async def create_feedback(
     serial: Optional[str] = "Example: 00:00:00:00:00:00:00",
     summary: Optional[str] = "Example: Less Itchy",
     details: Optional[str] = "Example: There is some improvement, the rash is less itchy now",
-    imgLink: Optional[str] = "Example: /storage.azure.com/sgsgsrg",
+    img_link: Optional[str] = "Example: /storage.azure.com/sgsgsrg",
     # feedback: FeedbackCreate,
     feedback_file: UploadFile = File(None),
     db: Session = Depends(get_db)
@@ -37,7 +44,7 @@ async def create_feedback(
         "serial": serial,
         "summary": summary,
         "details": details,
-        "imgLink": imgLink
+        "imgLink": img_link
     })
     # create feedback entry
     logger.info(f"feedback serial: {feedback.serial}")
