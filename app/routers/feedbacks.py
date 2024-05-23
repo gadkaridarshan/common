@@ -2,6 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
 import aiofiles
 
+from os import listdir
+from os.path import isfile, join
+
 from typing import Optional, List
 
 from ..internal.schemas import (
@@ -29,10 +32,14 @@ async def read_img(
     serial: Optional[str] = "00:00:00:00:00:00:00",
     date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
     ):
+    path="/Users/darshangadkari/Documents/Homeopath/uploaddata/"
+    onlyFiles = [f for f in listdir(path) if isfile(join(path, f))]
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
+    logger.info(onlyFiles)
     return FileResponse(
-        path="/Users/darshangadkari/Documents/Homeopath/uploaddata/",
-        filename=f"{serial.replace(':','_')}__{date_time_str}.png"
+        path=path,
+        filename=f"{serial.replace(':','_')}__{date_time_str}.png",
+        media_type="image/png"
         )
 
 
