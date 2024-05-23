@@ -37,7 +37,7 @@ async def read_img(
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
     logger.info(onlyFiles)
     return FileResponse(
-        path=path,
+        path=f"{path}{serial.replace(':','_')}__{date_time_str}.png",
         filename=f"{serial.replace(':','_')}__{date_time_str}.png",
         media_type="image/png"
         )
