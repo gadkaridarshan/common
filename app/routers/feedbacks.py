@@ -30,7 +30,7 @@ async def read_img(
     date_time_str: Optional[str] = "2024-05-23-18-00-34-328+100"
     ):
     logger.info(f"About to return img for the serial: {serial} and date time : {date_time_str}")
-    return FileResponse(f"/Users/darshangadkari/Documents/Homeopath/uploaddata/{serial.replace(':','_')}__{date_time_str}.png")
+    return FileResponse(f"{serial.replace(':','_')}__{date_time_str}.png")
 
 
 @router.post("/create/", response_model=Optional[Feedback])
