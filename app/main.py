@@ -35,11 +35,11 @@ except Exception as e:
 logger.info('DB tables are recreated')
 
 app = FastAPI(
-    title="Common API for Eczemap",
+    title="Backend API for AISkinScan",
     description=description,
     version="0.0.1",
     contact={
-        "name": "Darshan Gadkari @Eczemap",
+        "name": "Darshan Gadkari @AISkinScan",
         "email": "darshangadkari0@gmail.com",
     },
     openapi_tags=tags_metadata,
